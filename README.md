@@ -5,12 +5,12 @@ A Vuex plugin to take state snapshot on mutation.
 ## Installation
 
 ```shell
-yarn add vuex-snapshot
+yarn add vuex-state-snapshot
 ```
 
 ## Example
 
-See `examples/`
+See `examples/` or at [Code Sandbox](https://codesandbox.io/s/vuex-state-snapshot-example-cd1f4)
 
 ## Usage
 
