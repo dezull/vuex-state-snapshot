@@ -115,6 +115,42 @@ describe.each([
       expect(vm.redoCount).toBe(0)
     })
 
+    it('resets undo', () => {
+      const vm = createApp(namespace).vm
+      vm.setValue('abc')
+      vm.setValue('def')
+      vm.undo()
+      expect(vm.undoCount).toBe(1)
+      expect(vm.redoCount).toBe(1)
+      vm.resetUndo()
+      expect(vm.undoCount).toBe(0)
+      expect(vm.redoCount).toBe(1)
+    })
+
+    it('resets redo', () => {
+      const vm = createApp(namespace).vm
+      vm.setValue('abc')
+      vm.setValue('def')
+      vm.undo()
+      expect(vm.undoCount).toBe(1)
+      expect(vm.redoCount).toBe(1)
+      vm.resetRedo()
+      expect(vm.undoCount).toBe(1)
+      expect(vm.redoCount).toBe(0)
+    })
+
+    it('resets undo & redo snapshots', () => {
+      const vm = createApp(namespace).vm
+      vm.setValue('abc')
+      vm.setValue('def')
+      vm.undo()
+      expect(vm.undoCount).toBe(1)
+      expect(vm.redoCount).toBe(1)
+      vm.resetSnapshots()
+      expect(vm.undoCount).toBe(0)
+      expect(vm.redoCount).toBe(0)
+    })
+
     it('includes states by callback', () => {
       const vm = createApp(namespace, {
         includeState: (state, name) => name === 'value'
@@ -163,7 +199,7 @@ function createComponent (namespace) {
     methods: {
       ...mapMutations(['setUnique']),
       ...helpers.mapMutations(['setValue', 'clearValue', 'setExcluded']),
-      ...snapshot.mapActions(['undo', 'redo'])
+      ...snapshot.mapActions(['undo', 'redo', 'resetUndo', 'resetRedo', 'resetSnapshots'])
     }
   }
 }

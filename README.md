@@ -68,3 +68,20 @@ Callback to decide to track the mutation, eg: mutation to toggle UI element visi
 ```javascript
 (state, mutation) => state.trackedMutations.includes(mutation.type)
 ```
+
+### Available Getters and Actions
+
+#### Getters
+
+* `undoable`
+* `redoable`
+* `undoCount`
+* `redoCount`
+
+#### Actions
+
+* `undo`
+* `redo`
+* `clearUndo` - Clear undo history
+* `clearRedo` - Clear redo history
+* `clearSnapshots` - Clear both undo and redo histories

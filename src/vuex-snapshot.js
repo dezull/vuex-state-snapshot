@@ -121,6 +121,19 @@ const VuexSnapshot = class {
         undo: ({ dispatch }, { module }) => dispatch('do', { module, stack: DONES }),
         redo: ({ dispatch }, { module }) => dispatch('do', { module, stack: UNDONES }),
 
+        resetUndo: ({ commit }, { module }) => {
+          commit('clearStack', this.mutationPayload({ module, stack: DONES }))
+        },
+
+        resetRedo: ({ commit }, { module }) => {
+          commit('clearStack', this.mutationPayload({ module, stack: UNDONES }))
+        },
+
+        resetSnapshots: ({ commit, dispatch }, { module }) => {
+          dispatch('resetUndo', { module })
+          dispatch('resetRedo', { module })
+        },
+
         do: ({ commit, state }, { module, stack }) => {
           const inverse = stack === DONES ? UNDONES : DONES
           if (!state[this.stateName(module, stack)].length) return
@@ -130,14 +143,14 @@ const VuexSnapshot = class {
           this.previousDones[module] = cloneDeep(moduleState)
         },
 
-        snapshot: ({ commit, state }, { module, moduleState }) => {
+        snapshot: ({ commit, dispatch, state }, { module, moduleState }) => {
           const stateSnapshot = cloneDeep(moduleState)
           if (this.previousDones[module]) {
             commit('pushStack',
               this.mutationPayload({ module, stack: DONES, snapshot: this.previousDones[module] }))
           }
           this.previousDones[module] = stateSnapshot
-          commit('clearStack', this.mutationPayload({ module, stack: UNDONES }))
+          dispatch('resetRedo', { module })
         }
       },
 
