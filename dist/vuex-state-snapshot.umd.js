@@ -2505,11 +2505,38 @@
 	              stack: UNDONES
 	            });
 	          },
-	          do: function _do(_ref8, _ref9) {
-	            var commit = _ref8.commit,
-	                state = _ref8.state;
-	            var module = _ref9.module,
-	                stack = _ref9.stack;
+	          resetUndo: function resetUndo(_ref8, _ref9) {
+	            var commit = _ref8.commit;
+	            var module = _ref9.module;
+	            commit('clearStack', _this2.mutationPayload({
+	              module: module,
+	              stack: DONES
+	            }));
+	          },
+	          resetRedo: function resetRedo(_ref10, _ref11) {
+	            var commit = _ref10.commit;
+	            var module = _ref11.module;
+	            commit('clearStack', _this2.mutationPayload({
+	              module: module,
+	              stack: UNDONES
+	            }));
+	          },
+	          resetSnapshots: function resetSnapshots(_ref12, _ref13) {
+	            var commit = _ref12.commit,
+	                dispatch = _ref12.dispatch;
+	            var module = _ref13.module;
+	            dispatch('resetUndo', {
+	              module: module
+	            });
+	            dispatch('resetRedo', {
+	              module: module
+	            });
+	          },
+	          do: function _do(_ref14, _ref15) {
+	            var commit = _ref14.commit,
+	                state = _ref14.state;
+	            var module = _ref15.module,
+	                stack = _ref15.stack;
 	            var inverse = stack === DONES ? UNDONES : DONES;
 	            if (!state[_this2.stateName(module, stack)].length) return;
 
@@ -2526,11 +2553,12 @@
 	            }));
 	            _this2.previousDones[module] = cloneDeep(moduleState);
 	          },
-	          snapshot: function snapshot(_ref10, _ref11) {
-	            var commit = _ref10.commit,
-	                state = _ref10.state;
-	            var module = _ref11.module,
-	                moduleState = _ref11.moduleState;
+	          snapshot: function snapshot(_ref16, _ref17) {
+	            var commit = _ref16.commit,
+	                dispatch = _ref16.dispatch,
+	                state = _ref16.state;
+	            var module = _ref17.module,
+	                moduleState = _ref17.moduleState;
 	            var stateSnapshot = cloneDeep(moduleState);
 
 	            if (_this2.previousDones[module]) {
@@ -2542,10 +2570,9 @@
 	            }
 
 	            _this2.previousDones[module] = stateSnapshot;
-	            commit('clearStack', _this2.mutationPayload({
-	              module: module,
-	              stack: UNDONES
-	            }));
+	            dispatch('resetRedo', {
+	              module: module
+	            });
 	          }
 	        },
 	        getters: {
