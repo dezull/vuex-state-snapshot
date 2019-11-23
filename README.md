@@ -1,4 +1,4 @@
-# Vuex Snapshot
+# Vuex State Snapshot
 
 A Vuex plugin to take state snapshot on mutation.
 
@@ -10,7 +10,7 @@ yarn add vuex-state-snapshot
 
 ## Example
 
-See `examples/` or at [Code Sandbox](https://codesandbox.io/s/vuex-state-snapshot-example-cd1f4)
+See `examples/` at [Code Sandbox](https://codesandbox.io/s/vuex-state-snapshot-example-cd1f4)
 
 ## Usage
 
@@ -85,3 +85,7 @@ Callback to decide to track the mutation, eg: mutation to toggle UI element visi
 * `clearUndo` - Clear undo history
 * `clearRedo` - Clear redo history
 * `clearSnapshots` - Clear both undo and redo histories
+
+## License
+
+Vuex State Snapshot is released under the [MIT License](https://opensource.org/licenses/MIT).
