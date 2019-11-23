@@ -1,6 +1,6 @@
 {
   "name": "vuex-state-snapshot",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "license": "MIT",
   "private": false,
   "scripts": {
