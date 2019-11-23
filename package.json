@@ -8,7 +8,8 @@
     "build": "rimraf dist && rollup -c",
     "build:example": "vue-cli-service build --entry ./example/main.js --dest dist-example",
     "test": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "version": "yarn run build && git add dist"
   },
   "repository": {
     "type": "git",
