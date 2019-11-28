@@ -15,7 +15,7 @@
     "type": "git",
     "url": "https://github.com/dezull/vuex-state-snapshot.git"
   },
-  "main": "src/vuex-snapshot.js",
+  "main": "src/vuex-state-snapshot.js",
   "files": [
     "dist/*.js",
     "dist/*.map"
