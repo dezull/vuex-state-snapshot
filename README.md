@@ -17,6 +17,7 @@ See `examples/` at [Code Sandbox](https://codesandbox.io/s/vuex-state-snapshot-e
 Add the plugin to the Vuex *store*:
 
 ```javascript
+import { createPlugin } from 'vuex-state-snapshot'
 const store = new Vuex.Store({
   modules: {
     yourModuleNamespace: {
@@ -33,7 +34,7 @@ const store = new Vuex.Store({
 In *component*, use `createSnapshotHelpers` to map the helpers:
 
 ```javascript
-import { createSnapshotHelpers } from 'vuex-snapshot'
+import { createSnapshotHelpers } from 'vuex-state-snapshot'
 const snapshot = createSnapshotHelpers('yourModuleNamespace')
 
 export default {
@@ -48,6 +49,17 @@ export default {
   }
 }
 ```
+
+### Browser/Without Build Tool
+
+Use can use the UMD build in `dist/ ` (which  requires `lodash.cloneDeep`):
+
+```html
+<script src="https://unpkg.com/vuex@3.1.2/dist/vuex.min.js"></script>
+<script src="https://unpkg.com/lodash-core@4.17.15/distrib/lodash-core.min.js"></script>
+<script src="vuex-state-snapshot.umd.min.js"></script>
+```
+And use `createPlugin` and `createSnapshotHelpers` from the `VuexStateSnapshot` global.
 
 ### Module Options
 

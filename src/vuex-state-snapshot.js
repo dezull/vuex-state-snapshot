@@ -6,7 +6,7 @@ const DONES = 'dones'
 const UNDONES = 'undones'
 const MUTATION_TAG = `__${PLUGIN_NAME}__`
 
-const VuexSnapshot = class {
+const VuexStateSnapshot = class {
   constructor (store, moduleOptions) {
     this.store = store
     this.moduleOptions = moduleOptions
@@ -193,9 +193,9 @@ export function createSnapshotHelpers (namespace) {
 
 export function createPlugin (modules) {
   return store => {
-    const plugin = new VuexSnapshot(store, modules)
+    const plugin = new VuexStateSnapshot(store, modules)
     if (!plugin.moduleNames.length) {
-      throw new Error('Must specify modules to snapshot when initializing VuexSnapshot')
+      throw new Error('Must specify modules to snapshot when initializing VuexStateSnapshot')
     }
     plugin.registerPluginModule()
     plugin.takeAllSnapshots()

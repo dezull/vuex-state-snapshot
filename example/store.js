@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { createPlugin } from '@/vuex-snapshot'
+import { createPlugin } from '@/vuex-state-snapshot'
 
 Vue.use(Vuex)
 

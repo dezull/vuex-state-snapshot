@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('lodash/cloneDeep'), require('vuex')) :
 	typeof define === 'function' && define.amd ? define(['exports', 'lodash/cloneDeep', 'vuex'], factory) :
-	(global = global || self, factory(global.VuexSnapshot = {}, global._.cloneDeep, global.Vuex));
+	(global = global || self, factory(global.VuexStateSnapshot = {}, global._.cloneDeep, global.Vuex));
 }(this, (function (exports, cloneDeep, vuex) { 'use strict';
 
 	cloneDeep = cloneDeep && cloneDeep.hasOwnProperty('default') ? cloneDeep['default'] : cloneDeep;
@@ -2349,11 +2349,11 @@
 	var UNDONES = 'undones';
 	var MUTATION_TAG = "__".concat(PLUGIN_NAME, "__");
 
-	var VuexSnapshot =
+	var VuexStateSnapshot =
 	/*#__PURE__*/
 	function () {
-	  function VuexSnapshot(store, moduleOptions) {
-	    _classCallCheck(this, VuexSnapshot);
+	  function VuexStateSnapshot(store, moduleOptions) {
+	    _classCallCheck(this, VuexStateSnapshot);
 
 	    this.store = store;
 	    this.moduleOptions = moduleOptions;
@@ -2363,7 +2363,7 @@
 	    this.previousDones = {};
 	  }
 
-	  _createClass(VuexSnapshot, [{
+	  _createClass(VuexStateSnapshot, [{
 	    key: "mutationPayload",
 	    value: function mutationPayload(payload) {
 	      return Object.assign({}, payload, _defineProperty({}, MUTATION_TAG, true));
@@ -2601,7 +2601,7 @@
 	    }
 	  }]);
 
-	  return VuexSnapshot;
+	  return VuexStateSnapshot;
 	}();
 
 	function createSnapshotHelpers(namespace) {
@@ -2639,10 +2639,10 @@
 	}
 	function createPlugin(modules) {
 	  return function (store) {
-	    var plugin = new VuexSnapshot(store, modules);
+	    var plugin = new VuexStateSnapshot(store, modules);
 
 	    if (!plugin.moduleNames.length) {
-	      throw new Error('Must specify modules to snapshot when initializing VuexSnapshot');
+	      throw new Error('Must specify modules to snapshot when initializing VuexStateSnapshot');
 	    }
 
 	    plugin.registerPluginModule();

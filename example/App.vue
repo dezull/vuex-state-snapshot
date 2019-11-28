@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { createSnapshotHelpers } from '@/vuex-snapshot'
+import { createSnapshotHelpers } from '@/vuex-state-snapshot'
 import TicTacToe from './components/TicTacToe.vue'
 
 const snapshot = createSnapshotHelpers('tictactoe')

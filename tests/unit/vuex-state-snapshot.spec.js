@@ -2,13 +2,13 @@ import { createLocalVue, shallowMount } from '@vue/test-utils'
 import Vuex, { createNamespacedHelpers, mapMutations } from 'vuex'
 
 // Under test
-import { createPlugin, createSnapshotHelpers } from '@/vuex-snapshot'
+import { createPlugin, createSnapshotHelpers } from '@/vuex-state-snapshot'
 
 describe.each([
   ['namespaced module', 'one', 'one'],
   ['namespaced module under namespaced module', 'one/one_a', 'one_a'],
   ['namespaced module under non-namespaced module', 'two_b', 'two_b']
-])('VuexSnapshot', (description, namespace, initialValue) => {
+])('VuexStateSnapshot', (description, namespace, initialValue) => {
   describe(description, () => {
     it('sets initial states', () => {
       const vm = createApp(namespace).vm
